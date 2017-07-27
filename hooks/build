@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$DOCKER_TAG" == "latest" ]; then
+
+	docker build -t $IMAGE_NAME .
+
+else
+
+	PDI_RELEASE=$DOCKER_TAG
+	PDI_VERSION=$( echo $PDI_RELEASE | cut -d'.' -f1,2 )
+	
+	docker build --build-arg PDI_VERSION=$PDI_VERSION --build-arg PDI_RELEASE=$PDI_RELEASE -t $IMAGE_NAME .
+
+fi

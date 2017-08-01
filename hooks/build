@@ -2,13 +2,23 @@
 
 if [ "$DOCKER_TAG" == "latest" ]; then
 
-	docker build --build-arg GIT_BRANCH=$SOURCE_BRANCH --build-arg GIT_COMMIT=$GIT_SHA1 --build-arg GIT_MESSAGE=$GIT_MSG -t $IMAGE_NAME .
+	docker build \
+	--build-arg GIT_BRANCH="$SOURCE_BRANCH" \
+	--build-arg GIT_COMMIT="$GIT_SHA1" \
+	--build-arg GIT_MESSAGE="$GIT_MSG" \
+	-t $IMAGE_NAME .
 
 else
 
 	PDI_RELEASE=$DOCKER_TAG
 	PDI_VERSION=$( echo $PDI_RELEASE | cut -d'.' -f1,2 )
 	
-	docker build --build-arg PDI_VERSION=$PDI_VERSION --build-arg PDI_RELEASE=$PDI_RELEASE --build-arg GIT_BRANCH=$SOURCE_BRANCH --build-arg GIT_COMMIT=$GIT_SHA1 --build-arg GIT_MESSAGE=$GIT_MSG -t $IMAGE_NAME .
+	docker build \
+	--build-arg PDI_VERSION=$PDI_VERSION \
+	--build-arg PDI_RELEASE=$PDI_RELEASE \
+	--build-arg GIT_BRANCH="$SOURCE_BRANCH" \
+	--build-arg GIT_COMMIT="$GIT_SHA1" \
+	--build-arg GIT_MESSAGE="$GIT_MSG" \
+	-t $IMAGE_NAME .
 
 fi

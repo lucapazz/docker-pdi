@@ -2,6 +2,15 @@ FROM openjdk:latest
 
 LABEL maintainer="lucapazz"
 
+ARG GIT_BRANCH
+LABEL git.branch="${GIT_BRANCH}"
+
+ARG GIT_COMMIT
+LABEL git.commit="${GIT_COMMIT}"
+
+ARG GIT_MESSAGE
+LABEL git.message="${GIT_MESSAGE}"
+
 ARG PDI_VERSION
 ENV PDI_VERSION ${PDI_VERSION:-7.1}
 

@@ -1,0 +1,3 @@
+FROM lucapazz/docker-pdi:@TAG@
+
+RUN mkdir /pentaho/test && touch /pentaho/test/foo

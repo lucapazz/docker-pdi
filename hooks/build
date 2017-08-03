@@ -1,24 +1,6 @@
 #!/bin/bash
 
-if [[ "$DOCKER_TAG" =~ "test-" ]]; then
-
-	VERSION=$( echo $DOCKER_TAG | cut -d'-' -f2 )
-	
-	if [ "$VERSION" == "latest" ] || [ "$VERSION" == "7.1" ]; then
-		TAG="latest"
-	elif [ "$VERSION" == "6.1" ]; then
-		TAG="6.1.0.1-196"
-	else
-		exit -1
-	fi
-
-	SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
-	cp $SCRIPT_DIR/Dockerfile-test $SCRIPT_DIR/Dockerfile-test-tmp
-	sed -i '' "s#@TAG@#$TAG#" $SCRIPT_DIR/Dockerfile-test-tmp
-
-	docker build -f Dockerfile-test-tmp -t $IMAGE_NAME .
-
-elif [ "$DOCKER_TAG" == "latest" ]; then
+if [ "$DOCKER_TAG" == "latest" ]; then
 
 	docker build \
 	--build-arg GIT_BRANCH="$SOURCE_BRANCH" \

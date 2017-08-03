@@ -1,6 +1,10 @@
 #!/bin/bash
 
-if [ "$DOCKER_TAG" == "latest" ]; then
+if [ "$DOCKER_TAG" == "test-hook" ]; then
+
+	printenv
+
+elif [ "$DOCKER_TAG" == "latest" ]; then
 
 	docker build \
 	--build-arg GIT_BRANCH="$SOURCE_BRANCH" \
